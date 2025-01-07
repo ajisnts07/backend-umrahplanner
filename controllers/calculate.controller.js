@@ -16,7 +16,7 @@ const calculate = async (req, res) => {
     const totalRatesHotelUsd = [];
     const totalRatesSettingUsd = [];
     const totalRatesSettingIdr = [];
-    let usdToSar, usdToIdr, priceVisa, localOffice, focTl, b2b, b2c;
+    let usdToSar, usdToIdr, priceVisa, localOffice, focTl, b2b, b2c, sarRate, idrRate;
     const totalNets = [];
     const focUstads = [];
     const focTls = [];
@@ -114,7 +114,7 @@ const calculate = async (req, res) => {
         const idrPromise = currencyRate('USD', 'IDR');
         const sarPromise = currencyRate('USD', 'SAR');
 
-        const [sarRate, idrRate] = await Promise.all([sarPromise, idrPromise]);
+        [sarRate, idrRate] = await Promise.all([sarPromise, idrPromise]);
 
         if (setting !== null) {
           if (req.body && req.body.usdToSar && req.body.usdToIdr) {
@@ -298,6 +298,40 @@ const calculate = async (req, res) => {
       });
     }
 
+    console.log({
+      hotelMakkah: hotelMakkah,
+      nightInMakkah: nightInMakkah,
+      ratesHotelMakkah: hotelMakkah.roomPrices,
+      ratesPerPersonMakkah: ratesPerPersonMakkah,
+      hotelMadinah: hotelMadinah,
+      nightInMadinah: nightInMadinah,
+      ratesHotelMadinah: hotelMadinah.roomPrices,
+      ratesPerPersonMadinah: ratesPerPersonMadinah,
+      totalRatesHotelSar: totalRatesHotelSar,
+      totalRatesHotelUsd: totalRatesHotelUsd,
+      countVisa: countVisa,
+      priceVisa: priceVisa,
+      countLa: countVisa,
+      priceLa: la.laPrice,
+      totalRatesSettingUsd: totalRatesSettingUsd,
+      totalRatesSettingIdr: totalRatesSettingIdr,
+      airline: airline.name,
+      codeAirline: airline.code,
+      priceAirline: airline.airlinePrice,
+      localOffice: localOffice,
+      totalNets: totalNets,
+      countFocUstad: countVisa,
+      focUstads: focUstads,
+      countFocTl: countVisa,
+      focTls: focTls,
+      b2b: b2b,
+      b2bs: b2bs,
+      b2c: b2c,
+      b2cs: b2cs,
+      idrRate: idrRate,
+      sarRate: sarRate,
+    });
+
     res.status(201).json({
       code: 201,
       status: 'Created',
@@ -331,6 +365,8 @@ const calculate = async (req, res) => {
         b2bs: b2bs,
         b2c: b2c,
         b2cs: b2cs,
+        idrRate: idrRate,
+        sarRate: sarRate,
       },
     });
   } catch (error) {
