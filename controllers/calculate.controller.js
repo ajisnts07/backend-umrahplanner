@@ -297,41 +297,7 @@ const calculate = async (req, res) => {
         message: errors.join(', '),
       });
     }
-
-    console.log({
-      hotelMakkah: hotelMakkah,
-      nightInMakkah: nightInMakkah,
-      ratesHotelMakkah: hotelMakkah.roomPrices,
-      ratesPerPersonMakkah: ratesPerPersonMakkah,
-      hotelMadinah: hotelMadinah,
-      nightInMadinah: nightInMadinah,
-      ratesHotelMadinah: hotelMadinah.roomPrices,
-      ratesPerPersonMadinah: ratesPerPersonMadinah,
-      totalRatesHotelSar: totalRatesHotelSar,
-      totalRatesHotelUsd: totalRatesHotelUsd,
-      countVisa: countVisa,
-      priceVisa: priceVisa,
-      countLa: countVisa,
-      priceLa: la.laPrice,
-      totalRatesSettingUsd: totalRatesSettingUsd,
-      totalRatesSettingIdr: totalRatesSettingIdr,
-      airline: airline.name,
-      codeAirline: airline.code,
-      priceAirline: airline.airlinePrice,
-      localOffice: localOffice,
-      totalNets: totalNets,
-      countFocUstad: countVisa,
-      focUstads: focUstads,
-      countFocTl: countVisa,
-      focTls: focTls,
-      b2b: b2b,
-      b2bs: b2bs,
-      b2c: b2c,
-      b2cs: b2cs,
-      idrRate: idrRate,
-      sarRate: sarRate,
-    });
-
+    
     res.status(201).json({
       code: 201,
       status: 'Created',
@@ -367,6 +333,8 @@ const calculate = async (req, res) => {
         b2cs: b2cs,
         idrRate: idrRate,
         sarRate: sarRate,
+        usdToSar: usdToSar,
+        usdToIdr: usdToIdr,
       },
     });
   } catch (error) {
